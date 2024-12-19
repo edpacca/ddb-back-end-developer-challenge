@@ -2,6 +2,7 @@ import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import jest from "eslint-plugin-jest";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -9,8 +10,8 @@ export default [
     ignores: ["dist/"],
   },
   { files: ["src/**/*.{js,ts}", "tests/**/*.{js,ts}"] },
-  {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
-  {languageOptions: { globals: globals.node }},
+  { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
+  { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -21,4 +22,5 @@ export default [
       "jest/prefer-expect-assertions": "off",
     },
   },
+  eslintPluginPrettierRecommended,
 ];
