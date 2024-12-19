@@ -1,0 +1,17 @@
+{
+  "name": "ddb-back-end-developer-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+	"build": "tsc"
+  },
+  "keywords": [],
+  "author": "Edpacca",
+  "license": "ISC",
+  "description": "Submission project for D&D Beyond backend developer coding assignment",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
