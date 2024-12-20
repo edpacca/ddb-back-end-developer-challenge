@@ -2,19 +2,23 @@ import { Request, Response } from "express";
 import Character from "../../model/schema/CharacterSchema";
 import defaultCharacterData from "../../data/briv.json";
 
-export const createDefaultCharacter = async () => {
+// only intended for internal use to load in the test data
+export async function initialiseCharacterDb() {
   try {
-    const newCharacter = await Character.create(defaultCharacterData);
+    await Character.deleteMany({}); // Clear characters
+    const newCharacter = await Character.create({
+      ...defaultCharacterData,
+      _id: "briv",
+      currentHitPoints: defaultCharacterData.hitPoints,
+    });
+    console.log(`Created new character: ${newCharacter.name}`);
   } catch (error) {
-    console.error("error creating character");
+    console.error("error creating character", error);
   }
-};
+}
 
 // Get a character by ID
-export const getCharacter = async (
-  req: Request,
-  res: Response,
-): Promise<Response> => {
+export const getCharacter = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id } = req.params;
     const character = await Character.findById(id);
@@ -30,10 +34,7 @@ export const getCharacter = async (
 };
 
 // Update a character by ID
-export const updateCharacter = async (
-  req: Request,
-  res: Response,
-): Promise<Response> => {
+export const updateCharacter = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id } = req.params;
     const updates = req.body;
@@ -53,10 +54,7 @@ export const updateCharacter = async (
 };
 
 // Delete a character by ID
-export const deleteCharacter = async (
-  req: Request,
-  res: Response,
-): Promise<Response> => {
+export const deleteCharacter = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { id } = req.params;
 
