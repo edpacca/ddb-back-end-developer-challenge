@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
+import { ItemModifier } from "../interface/itemModifier";
 
-// Sub-schema for Modifier
-export const ItemModifierSchema = new mongoose.Schema({
+export const ItemModifierSchema = new Schema<ItemModifier>({
   affectedObject: { type: String, required: true },
   affectedValue: { type: String, required: true },
   value: { type: Number, required: true },

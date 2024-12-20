@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
 import { ItemModifierSchema } from "./ItemModifierSchema";
+import { Item } from "../interface/item";
 
-// Sub-schema for Items
-export const ItemSchema = new mongoose.Schema({
+export const ItemSchema = new Schema<Item>({
   name: { type: String, required: true },
   modifier: { type: ItemModifierSchema, required: false },
 });

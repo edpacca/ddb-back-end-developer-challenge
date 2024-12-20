@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
+import { Stats } from "../interface/stats";
 
-// Sub-schema for Stats
-export const StatsSchema = new mongoose.Schema({
+export const StatsSchema = new Schema<Stats>({
   strength: { type: Number, required: true },
   dexterity: { type: Number, required: true },
   constitution: { type: Number, required: true },

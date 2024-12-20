@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import { Schema } from "mongoose";
+import { Defense } from "../interface/defense";
 
-// sub schema for defense
-export const DefenseSchema = new mongoose.Schema({
+export const DefenseSchema = new Schema<Defense>({
   type: { type: String, required: true },
   defense: { type: String, required: true },
 });
