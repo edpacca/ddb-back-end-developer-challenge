@@ -6,6 +6,7 @@ import { DefenseSchema } from "./DefenseSchema";
 import { Character } from "../interface/character";
 
 const CharacterSchema = new Schema<Character>({
+  _id: { type: String, required: true },
   name: { type: String, required: true },
   level: { type: Number, required: true },
   hitPoints: { type: Number, required: true },
