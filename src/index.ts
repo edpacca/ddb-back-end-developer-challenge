@@ -2,9 +2,8 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config";
-import DB from "./db";
+import setupDatabase from "./db/index";
 import routes from "./routes/routes";
-import { initialiseCharacterDb } from "./controllers/character/characterController";
 
 const app = express();
 
@@ -16,9 +15,13 @@ if (config.env === "development") {
   app.use(morgan("dev"));
 }
 
-// Configure DB events
-DB.on("error", console.error.bind(console, "Connection error"));
-DB.on("connected", initialiseCharacterDb);
+// connect database
+// run this way to dynamically infer whether environment is prod or dev
+// if dev we use a local in-memory storage system
+// if prod we use mongoDB
+(async () => {
+  await setupDatabase();
+})();
 
 // configure routes
 routes(app);

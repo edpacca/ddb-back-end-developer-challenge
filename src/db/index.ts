@@ -1,14 +1,19 @@
-import mongoose from "mongoose";
 import config from "../config";
+import { connectDB, initialiseCharacterDb } from "./dbConnection";
+import { CharacterRepository } from "./localCharacterRepository";
 
-const dbConfig = config.getDatabaseConfig();
-const mongo_uri = `${dbConfig.uri}/${dbConfig.database}`;
-mongoose.set("strictQuery", false);
-
-mongoose.connect(mongo_uri).catch((e) => {
-  if (config.debug) {
-    console.error("Connection error", e.message);
+async function setupDatabase() {
+  if (config.env === "production") {
+    // Configure DB events
+    const DB = await connectDB();
+    if (DB) {
+      DB.on("error", console.error.bind(console, "Connection error"));
+      DB.on("connected", initialiseCharacterDb);
+    }
+  } else {
+    new CharacterRepository();
+    console.log("Set up local Character repository");
   }
-});
+}
 
-export default mongoose.connection;
+export default setupDatabase;

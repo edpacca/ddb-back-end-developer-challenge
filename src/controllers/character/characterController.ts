@@ -1,21 +1,5 @@
 import { Request, Response } from "express";
 import Character from "../../model/schema/CharacterSchema";
-import defaultCharacterData from "../../data/briv.json";
-
-// only intended for internal use to load in the test data
-export async function initialiseCharacterDb() {
-  try {
-    await Character.deleteMany({}); // Clear characters
-    const newCharacter = await Character.create({
-      ...defaultCharacterData,
-      _id: "briv",
-      currentHitPoints: defaultCharacterData.hitPoints,
-    });
-    console.log(`Created new character: ${newCharacter.name}`);
-  } catch (error) {
-    console.error("error creating character", error);
-  }
-}
 
 // Get a character by ID
 export const getCharacter = async (req: Request, res: Response): Promise<Response> => {
