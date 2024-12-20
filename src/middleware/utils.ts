@@ -1,7 +1,7 @@
 import { Request } from "express";
-import { DamageType } from "../../model/enum/DamageType";
-import { isStringPositiveInteger } from "../../utils/isStringPositiveInteger";
-import { isDamageType } from "../../utils/isValidDamageType";
+import { DamageType } from "../model/enum/DamageType";
+import { isStringPositiveInteger } from "../utils/isStringPositiveInteger";
+import { isDamageType } from "../utils/isValidDamageType";
 
 /**
  * Validates that the request parameters include an `id`.
