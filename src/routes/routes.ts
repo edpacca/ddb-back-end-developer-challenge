@@ -3,7 +3,7 @@ import {
   validateDamageRequest,
   validateHealRequest,
   validateUpdateTempHitPointsRequest,
-} from "../middleware/validation/requestValidation";
+} from "../middleware/requestValidation";
 import { healCharacter } from "../controllers/heal/healController";
 import { damageCharacter } from "../controllers/damage/damageController";
 import { updateCharacterTempHitpoints } from "../controllers/tempHitPoints/tempHitPointsController";
