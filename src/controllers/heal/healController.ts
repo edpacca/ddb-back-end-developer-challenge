@@ -10,7 +10,8 @@ export async function healCharacter(req: Request, res: Response): Promise<Respon
     const { healAmount } = req.body;
 
     // use .lean() to strip additional mongodb document properties
-    const character: Character | null = await CharacterDb.findById(id).lean();
+    // use conditional chaining in case of null value
+    const character: Character | null = await CharacterDb.findById(id)?.lean();
 
     if (!character) {
       return res.status(404).json({ message: "Character not found" });
@@ -27,8 +28,8 @@ export async function healCharacter(req: Request, res: Response): Promise<Respon
       id: character._id,
       name: character.name,
       healing: healAmount,
-      originalHitPoints: originalHitPoints,
-      updatedHitpoints: updatedHitpoints,
+      original_hit_points: originalHitPoints,
+      updated_hit_points: updatedHitpoints,
     });
   } catch (error) {
     return res.status(500).json({ message: "Something went terribly wrong...", error });
