@@ -5,7 +5,7 @@ export function validateDamageRequest(req: Request, res: Response, next: NextFun
   try {
     validateIdInReqParams(req);
     const { damageType, damageAmount } = req.body;
-    if (!damageAmount || !damageType) {
+    if ((damageAmount != 0 && !damageAmount) || !damageType) {
       throw new Error("Parameters must include:  damageType, damageAmount");
     }
     validateDamageType(damageType);
@@ -23,7 +23,7 @@ export function validateHealRequest(req: Request, res: Response, next: NextFunct
   try {
     validateIdInReqParams(req);
     const { healAmount } = req.body;
-    if (!healAmount) {
+    if (healAmount != 0 && !healAmount) {
       throw new Error("Request Body must include: healAmount");
     }
     validatePositiveInteger(healAmount);
@@ -44,7 +44,7 @@ export function validateUpdateTempHitPointsRequest(
   try {
     validateIdInReqParams(req);
     const { tempHitPointsAmount } = req.body;
-    if (!tempHitPointsAmount) {
+    if (tempHitPointsAmount != 0 && !tempHitPointsAmount) {
       throw new Error("Request Body must include: tempHitPointsAmount");
     }
     validatePositiveInteger(tempHitPointsAmount);
