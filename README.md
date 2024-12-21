@@ -34,6 +34,13 @@ This project is built on NodeJS using TypeScript, Express and MongoDB, following
 
 ## Scripts
 
+| **Script** | **Command**               | **Description**                                 |
+| ---------- | ------------------------- | ----------------------------------------------- |
+| `build`    | `tsc`                     | Compiles the TypeScript files into JavaScript.  |
+| `start`    | `npm run build && node .` | Builds the project and starts the application.  |
+| `test`     | `jest`                    | Runs the test suite using Jest.                 |
+| `lint`     | `eslint`                  | Lints the codebase for style and syntax issues. |
+
 ## Project Setup
 
 ```
