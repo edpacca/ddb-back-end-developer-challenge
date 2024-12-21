@@ -28,11 +28,11 @@ export function validateDamageType(damageType: string): void {
 
 /**
  * Validates that the provided string represents a positive integer.
- * @param damageAmount - The string representing the damage amount to validate.
+ * @param amount - The string representing the damage amount to validate.
  * @throws Error if the string is not a positive integer.
  */
-export function validatePositiveInteger(damageAmount: string): void {
-  if (!isStringPositiveInteger(damageAmount)) {
-    throw new Error("Damage Amount must be a positive integer");
+export function validatePositiveInteger(amount: string): void {
+  if (!isStringPositiveInteger(amount)) {
+    throw new Error("Amount must be a positive integer");
   }
 }
