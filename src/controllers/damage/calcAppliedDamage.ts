@@ -7,6 +7,10 @@ import { DefenseType } from "../../model/enum/DefenseType";
  * @returns number: The damage to be applied after modifiers
  */
 export function calcAppliedDamage(damageAmount: number, defenseType: DefenseType): number {
+  if (damageAmount < 0) {
+    return 0;
+  }
+
   switch (defenseType) {
     case DefenseType.None:
       return damageAmount;
