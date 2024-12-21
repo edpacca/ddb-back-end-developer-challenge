@@ -11,8 +11,7 @@ export async function initialiseCharacterDb() {
       _id: "briv",
       currentHitPoints: defaultCharacterData.hitPoints,
     });
-    console.log(`Initialised character
-      '${newCharacter.name}' in DB`);
+    console.log(`Initialised character '${newCharacter.name}' in DB`);
   } catch (error) {
     console.error("error creating character", error);
   }
