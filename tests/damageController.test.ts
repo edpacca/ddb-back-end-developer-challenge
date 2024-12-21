@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import CharacterDb from "../src/model/schema/CharacterSchema";
+import CharacterDb from "../src/models/schema/CharacterSchema";
 import { damageCharacter } from "../src/controllers/damage/damageController";
 import { checkDefenceAgainstDamageType } from "../src/controllers/damage/checkDefenseAgainstDamageType";
 import { extractHitpoints } from "../src/utils/extractHitpoints";
 import { damageHitPoints } from "../src/controllers/damage/damageHitPoints";
-import { DamageType } from "../src/model/enum/DamageType";
-import { DefenseType } from "../src/model/enum/DefenseType";
-import { HitPoints } from "../src/model/interface/character";
+import { DamageType } from "../src/models/enums/DamageType";
+import { DefenseType } from "../src/models/enums/DefenseType";
+import { HitPoints } from "../src/models/interfaces/character";
 import { testCharacter } from "./testData";
 import { calcAppliedDamage } from "../src/controllers/damage/calcAppliedDamage";
 
-jest.mock("../src/model/schema/CharacterSchema");
+jest.mock("../src/models/schema/CharacterSchema");
 jest.mock("../src/controllers/damage/checkDefenseAgainstDamageType");
 jest.mock("../src/controllers/damage/calcAppliedDamage");
 jest.mock("../src/controllers/damage/damageHitPoints");

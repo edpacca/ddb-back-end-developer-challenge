@@ -1,7 +1,7 @@
 import { checkDefenceAgainstDamageType } from "../src/controllers/damage/checkDefenseAgainstDamageType";
-import { DamageType } from "../src/model/enum/DamageType";
-import { DefenseType } from "../src/model/enum/DefenseType";
-import { Defense } from "../src/model/interface/defense";
+import { DamageType } from "../src/models/enums/DamageType";
+import { DefenseType } from "../src/models/enums/DefenseType";
+import { Defense } from "../src/models/interfaces/defense";
 
 const testDefenses: Defense[] = [
   {

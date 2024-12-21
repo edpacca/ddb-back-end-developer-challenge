@@ -1,5 +1,5 @@
 import { calcAppliedDamage } from "../src/controllers/damage/calcAppliedDamage";
-import { DefenseType } from "../src/model/enum/DefenseType";
+import { DefenseType } from "../src/models/enums/DefenseType";
 
 describe("calcAppliedDamage", () => {
   it("should return the full damage amount when defense type is None", () => {

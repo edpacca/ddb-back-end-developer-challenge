@@ -1,5 +1,5 @@
 import { healHitPoints } from "../src/controllers/heal/healHitPoints";
-import { HitPoints } from "../src/model/interface/character";
+import { HitPoints } from "../src/models/interfaces/character";
 
 describe("healHitPoints", () => {
   it("should increase currentHitPoints by the appliedHealing if it does not exceed maximum", () => {

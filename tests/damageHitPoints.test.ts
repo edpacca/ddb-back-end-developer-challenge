@@ -1,4 +1,4 @@
-import { HitPoints } from "../src/model/interface/character";
+import { HitPoints } from "../src/models/interfaces/character";
 import { damageHitPoints } from "../src/controllers/damage/damageHitPoints";
 
 describe("damageHitPoints", () => {
