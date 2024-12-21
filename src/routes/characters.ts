@@ -50,7 +50,7 @@ router.post(
 );
 
 // EJP: No validation on character data due to time contstraints and scope
-router.post("/:id", async (req: CreateCharacterRequestBody, res: Response) => {
+router.post("/", async (req: CreateCharacterRequestBody, res: Response) => {
   await createCharacter(req, res);
 });
 
