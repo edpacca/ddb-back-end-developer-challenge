@@ -8,6 +8,7 @@ import { healCharacter } from "../controllers/heal/healController";
 import { damageCharacter } from "../controllers/damage/damageController";
 import { updateCharacterTempHitpoints } from "../controllers/tempHitPoints/tempHitPointsController";
 import {
+  CreateCharacterRequestBody,
   DamageRequestBody,
   EmptyRequestBody,
   HealRequestBody,
@@ -15,6 +16,7 @@ import {
   UpdateTempHitPointsRequestBody,
 } from "./types";
 import {
+  createCharacter,
   deleteCharacter,
   getCharacter,
   updateCharacter,
@@ -46,30 +48,19 @@ function appRouter(app: Express): void {
     },
   );
 
-  /**
-   * @route GET /characters/:id
-   * @desc Get a character by ID
-   * @access Public
-   */
+  // EJP: No validation on character data due to time contstraints and scope
+  app.post("/characters/:id", async (req: CreateCharacterRequestBody, res: Response) => {
+    await createCharacter(req, res);
+  });
+
   app.get("/characters/:id", async (req: EmptyRequestBody, res: Response) => {
     await getCharacter(req, res);
   });
 
-  // EJP: No validation on character data due to time contstraints and scope
-  /**
-   * @route PUT /characters/:id
-   * @desc Update a character by ID
-   * @access Public
-   */
   app.put("/characters/:id", async (req: UpdateCharacterRequestBody, res: Response) => {
     await updateCharacter(req, res);
   });
 
-  /**
-   * @route DELETE /characters/:id
-   * @desc Delete a character by ID
-   * @access Public
-   */
   app.delete("/characters/:id", async (req: EmptyRequestBody, res: Response) => {
     await deleteCharacter(req, res);
   });
