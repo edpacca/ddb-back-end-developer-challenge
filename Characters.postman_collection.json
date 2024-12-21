@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "bc0fd0a1-ee3a-4526-8018-46062e067008",
+		"name": "Characters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15609343"
+	},
+	"item": [
+		{
+			"name": "Damage Character",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"damageAmount\": 10,\n    \"damageType\": \"fire\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/characters/{{id}}/damage",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						"{{id}}",
+						"damage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Heal Character",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"healAmount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/characters/{{id}}/heal",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						"{{id}}",
+						"heal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Temp HitPoints",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tempHitPointsAmount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/characters/{{id}}/temphp",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						"{{id}}",
+						"temphp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create character",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_id\": \"bob\",\n    \"name\": \"Bill the Pony\",\n    \"level\": 7,\n    \"hitPoints\": 60,\n    \"currentHitPoints\": 40,\n    \"tempHitPoints\": 10,\n    \"characterClasses\": [\n        {\n            \"name\": \"paladin\",\n            \"hitDiceValue\": 10,\n            \"classLevel\": 7\n        }\n    ],\n    \"stats\": {\n        \"strength\": 18,\n        \"dexterity\": 10,\n        \"constitution\": 16,\n        \"intelligence\": 11,\n        \"wisdom\": 12,\n        \"charisma\": 20\n    },\n    \"items\": [\n        {\n            \"name\": \"Amulet of Health\",\n            \"modifier\": {\n                \"affectedObject\": \"stats\",\n                \"affectedValue\": \"constitution\",\n                \"value\": 4\n            }\n        },\n        {\n            \"name\": \"Sword of Vengeance\",\n            \"modifier\": {\n                \"affectedObject\": \"stats\",\n                \"affectedValue\": \"strength\",\n                \"value\": 3\n            }\n        }\n    ],\n    \"defenses\": [\n        {\n            \"type\": \"cold\",\n            \"defense\": \"resistance\"\n        },\n        {\n            \"type\": \"necrotic\",\n            \"defense\": \"immunity\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/characters/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Character",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Briv the Brave\",\n    \"level\": 6,\n    \"hitPoints\": 30,\n    \"currentHitPoints\": 30\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/characters/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Character",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/characters/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Character",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/characters/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"characters",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
