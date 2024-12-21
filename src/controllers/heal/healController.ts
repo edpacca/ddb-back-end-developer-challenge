@@ -8,6 +8,8 @@ export async function healCharacter(req: Request, res: Response): Promise<Respon
   try {
     const { id } = req.params;
     const { healAmount } = req.body;
+    const healing = Number(healAmount); // ideally would sanitize body with middleware
+
     // use .lean() to strip additional mongodb document properties
     // use conditional chaining in case of null value
     const character: Character | null = await CharacterDb.findById(id)?.lean();
@@ -17,7 +19,7 @@ export async function healCharacter(req: Request, res: Response): Promise<Respon
     }
 
     const originalHitPoints: HitPoints = extractHitpoints(character);
-    const updatedHitpoints: HitPoints = healHitPoints(originalHitPoints, healAmount);
+    const updatedHitpoints: HitPoints = healHitPoints(originalHitPoints, healing);
 
     const updatedCharacter: Character = { ...character, ...updatedHitpoints };
     await CharacterDb.findByIdAndUpdate(id, { ...updatedCharacter });
@@ -26,7 +28,7 @@ export async function healCharacter(req: Request, res: Response): Promise<Respon
     return res.status(200).json({
       id: character._id,
       name: character.name,
-      healing: healAmount,
+      healing: healing,
       original_hit_points: originalHitPoints,
       updated_hit_points: updatedHitpoints,
     });

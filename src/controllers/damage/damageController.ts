@@ -11,6 +11,7 @@ export async function damageCharacter(req: Request, res: Response): Promise<Resp
   try {
     const { id } = req.params;
     const { damageType, damageAmount } = req.body;
+    const damage = Number(damageAmount); // ideally would sanitize body with middleware
 
     // use .lean() to strip additional mongodb document properties
     // use conditional chaining in case of null value
@@ -21,7 +22,7 @@ export async function damageCharacter(req: Request, res: Response): Promise<Resp
     }
 
     const defenseType: DefenseType = checkDefenceAgainstDamageType(character.defenses, damageType);
-    const appliedDamage: number = calcAppliedDamage(damageAmount, defenseType);
+    const appliedDamage: number = calcAppliedDamage(damage, defenseType);
     const originalHitPoints: HitPoints = extractHitpoints(character);
     const newHitPoints: HitPoints = damageHitPoints(originalHitPoints, appliedDamage);
 
@@ -32,7 +33,7 @@ export async function damageCharacter(req: Request, res: Response): Promise<Resp
     return res.status(200).json({
       id: character._id,
       name: character.name,
-      base_damage: damageAmount,
+      base_damage: damage,
       damage_recieved: appliedDamage,
       damage_type_recieved: damageType,
       defense_against_damage: defenseType,

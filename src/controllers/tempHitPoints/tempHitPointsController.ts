@@ -7,6 +7,7 @@ export async function updateCharacterTempHitpoints(req: Request, res: Response):
   try {
     const { id } = req.params;
     const { tempHitPointsAmount } = req.body;
+    const tempHitPoints = Number(tempHitPointsAmount); // ideally would sanitize body with middleware
 
     // use .lean() to strip additional mongodb document properties
     // use conditional chaining in case of null value
@@ -17,7 +18,7 @@ export async function updateCharacterTempHitpoints(req: Request, res: Response):
     }
 
     const originalTempHitPoints = character.tempHitPoints;
-    const updatedTempHitPoints = calcNewTempHitPoints(originalTempHitPoints, tempHitPointsAmount);
+    const updatedTempHitPoints = calcNewTempHitPoints(originalTempHitPoints, tempHitPoints);
 
     const updatedCharacter: Character = { ...character, tempHitPoints: updatedTempHitPoints };
     await CharacterDb.findByIdAndUpdate(id, { ...updatedCharacter });
@@ -26,7 +27,7 @@ export async function updateCharacterTempHitpoints(req: Request, res: Response):
     return res.status(200).json({
       id: character._id,
       name: character.name,
-      temp_hit_points_applied: tempHitPointsAmount,
+      temp_hit_points_applied: tempHitPoints,
       original_temp_hit_points: originalTempHitPoints,
       updated_temp_hit_points: updatedTempHitPoints,
     });
