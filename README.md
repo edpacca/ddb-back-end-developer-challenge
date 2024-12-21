@@ -50,6 +50,22 @@ This project is built on **Node.js** using **TypeScript**, **Express**, and **Mo
 
 ---
 
+## Structure
+
+```
+├── src/
+│   ├── controllers/     # Business logic
+│   ├── models/          # Data models and Schema definitions
+│   ├── routes/          # Character router
+│   ├── middleware/      # Request validation
+│   ├── utils/           # Generic helper functions
+│   ├── data/            # Raw JSON data
+│   ├── db/              # Database setup files
+├── tests/
+```
+
+---
+
 ## Project Setup
 
 ### Clone the Repository
