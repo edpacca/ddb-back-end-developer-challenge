@@ -29,3 +29,5 @@ export type UpdateTempHitPointsRequestBody = TypedRequestBody<UpdateTempHitPoint
 export type EmptyRequestBody = TypedRequestBody<{}>;
 
 export type UpdateCharacterRequestBody = TypedRequestBody<{ data: Character }>;
+
+export type CreateCharacterRequestBody = TypedRequestBody<{ data: Character }>;
