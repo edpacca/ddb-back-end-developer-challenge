@@ -13,7 +13,7 @@ export function validateDamageRequest(req: Request, res: Response, next: NextFun
     return next();
   } catch (error) {
     if (error instanceof Error) {
-      return res.status(404).json({ error: error.message });
+      return res.status(400).json({ error: error.message });
     }
     return res.status(500).send(error);
   }
@@ -30,7 +30,7 @@ export function validateHealRequest(req: Request, res: Response, next: NextFunct
     return next();
   } catch (error) {
     if (error instanceof Error) {
-      return res.status(404).json({ error: error.message });
+      return res.status(400).json({ error: error.message });
     }
     return res.status(500).send(error);
   }
@@ -51,7 +51,7 @@ export function validateUpdateTempHitPointsRequest(
     return next();
   } catch (error) {
     if (error instanceof Error) {
-      return res.status(404).json({ error: error.message });
+      return res.status(400).json({ error: error.message });
     }
     return res.status(500).send(error);
   }
