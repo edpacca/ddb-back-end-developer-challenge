@@ -9,6 +9,7 @@ export async function initialiseCharacterDb() {
     const newCharacter = await Character.create({
       ...defaultCharacterData,
       _id: "briv",
+      characterClasses: defaultCharacterData.classes, // do not use classes as attribute name
       currentHitPoints: defaultCharacterData.hitPoints,
     });
     console.log(`Initialised character '${newCharacter.name}' in DB`);
@@ -19,7 +20,7 @@ export async function initialiseCharacterDb() {
 
 export async function createCharacter(req: Request, res: Response): Promise<Response> {
   try {
-    const { data } = req.body;
+    const data = req.body;
     const newCharacter = await Character.create({ ...data });
 
     return res.status(201).json(newCharacter);
@@ -47,6 +48,7 @@ export async function updateCharacter(req: Request, res: Response): Promise<Resp
   try {
     const { id } = req.params;
     const updates = req.body;
+    delete updates._id; // do not override _id
 
     const updatedCharacter = await Character.findByIdAndUpdate(id, updates, {
       new: true,
@@ -65,6 +67,13 @@ export async function updateCharacter(req: Request, res: Response): Promise<Resp
 export async function deleteCharacter(req: Request, res: Response): Promise<Response> {
   try {
     const { id } = req.params;
+
+    if (id === "briv") {
+      return res.status(418).json({
+        message:
+          "If you think a mere DELETE request can delete Briv, then you are gravely mistaken. Briv cannot be deleted!",
+      });
+    }
 
     const deletedCharacter = await Character.findByIdAndDelete(id);
 

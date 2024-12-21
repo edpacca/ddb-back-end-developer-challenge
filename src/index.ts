@@ -13,7 +13,7 @@ app.use(helmet()); // helmet sets security related HTTP headers
 app.use(helmet.xssFilter()); // protect against cross site scripting
 app.use(express.json()); // only accept json payloads
 
-if (config.env === "development") {
+if (config.debug) {
   app.use(morgan("dev"));
 }
 
@@ -25,7 +25,7 @@ DB.on("connected", initialiseCharacterDb);
 app.use("/characters", characters);
 
 app.listen(config.port, () => {
-  if (config.env === "development") {
+  if (config.env === "development" || config.debug) {
     console.log(`server listening on port: ${config.port}`);
   }
 });
