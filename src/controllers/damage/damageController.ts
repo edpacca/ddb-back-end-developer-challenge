@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import CharacterDb from "../../model/schema/CharacterSchema";
-import { Character, HitPoints } from "../../model/interface/character";
-import { DefenseType } from "../../model/enum/DefenseType";
+import CharacterDb from "../../models/schema/CharacterSchema";
+import { Character, HitPoints } from "../../models/interfaces/character";
+import { DefenseType } from "../../models/enums/DefenseType";
 import { checkDefenceAgainstDamageType } from "./checkDefenseAgainstDamageType";
 import { calcAppliedDamage } from "./calcAppliedDamage";
 import { extractHitpoints } from "../../utils/extractHitpoints";

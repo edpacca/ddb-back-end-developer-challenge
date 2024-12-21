@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import CharacterDb from "../../model/schema/CharacterSchema";
-import { Character } from "../../model/interface/character";
+import CharacterDb from "../../models/schema/CharacterSchema";
+import { Character } from "../../models/interfaces/character";
 import { calcNewTempHitPoints } from "./calcNewTempHitPoints";
 
 export async function updateCharacterTempHitpoints(req: Request, res: Response): Promise<Response> {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import CharacterDb from "../../model/schema/CharacterSchema";
-import { Character, HitPoints } from "../../model/interface/character";
+import CharacterDb from "../../models/schema/CharacterSchema";
+import { Character, HitPoints } from "../../models/interfaces/character";
 import { extractHitpoints } from "../../utils/extractHitpoints";
 import { healHitPoints } from "./healHitPoints";
 

@@ -1,4 +1,4 @@
-import { DefenseType } from "../../model/enum/DefenseType";
+import { DefenseType } from "../../models/enums/DefenseType";
 
 /**
  * Calculates to amount of damage applied based on defenses

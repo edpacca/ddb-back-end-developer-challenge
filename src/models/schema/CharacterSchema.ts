@@ -3,7 +3,7 @@ import { CharacterClassSchema } from "./CharacterClassSchema";
 import { StatsSchema } from "./StatsSchema";
 import { ItemSchema } from "./ItemSchema";
 import { DefenseSchema } from "./DefenseSchema";
-import { Character } from "../interface/character";
+import { Character } from "../interfaces/character";
 
 const CharacterSchema = new Schema<Character>({
   _id: { type: String, required: true },

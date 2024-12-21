@@ -10,6 +10,7 @@ const app = express();
 
 // configure middleware
 app.use(helmet()); // helmet sets security related HTTP headers
+app.use(helmet.xssFilter()); // protect against cross site scripting
 app.use(express.json()); // only accept json payloads
 
 if (config.env === "development") {

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Character } from "../model/interface/character";
+import { Character } from "../models/interfaces/character";
 
 export interface DamageRequest {
   damageAmount: number;

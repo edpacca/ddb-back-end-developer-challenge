@@ -1,4 +1,4 @@
-import { HitPoints } from "../../model/interface/character";
+import { HitPoints } from "../../models/interfaces/character";
 
 /**
  * Takes a HitPoints obejct and updates with healing

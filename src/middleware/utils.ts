@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { DamageType } from "../model/enum/DamageType";
+import { DamageType } from "../models/enums/DamageType";
 import { isStringPositiveInteger } from "../utils/isStringPositiveInteger";
 import { isDamageType } from "../utils/isValidDamageType";
 

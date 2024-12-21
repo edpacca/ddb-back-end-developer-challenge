@@ -1,6 +1,6 @@
-import { DamageType } from "../../model/enum/DamageType";
-import { DefenseType } from "../../model/enum/DefenseType";
-import { Defense } from "../../model/interface/defense";
+import { DamageType } from "../../models/enums/DamageType";
+import { DefenseType } from "../../models/enums/DefenseType";
+import { Defense } from "../../models/interfaces/defense";
 
 /**
  * Returns the defense type for a given damage type.

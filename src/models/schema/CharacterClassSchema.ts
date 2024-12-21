@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { CharacterClass } from "../interface/characterClass";
+import { CharacterClass } from "../interfaces/characterClass";
 
 export const CharacterClassSchema = new Schema<CharacterClass>({
   name: { type: String, required: true },
