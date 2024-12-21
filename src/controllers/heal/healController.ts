@@ -8,7 +8,6 @@ export async function healCharacter(req: Request, res: Response): Promise<Respon
   try {
     const { id } = req.params;
     const { healAmount } = req.body;
-
     // use .lean() to strip additional mongodb document properties
     // use conditional chaining in case of null value
     const character: Character | null = await CharacterDb.findById(id)?.lean();
