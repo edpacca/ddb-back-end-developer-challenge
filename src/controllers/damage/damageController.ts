@@ -32,7 +32,8 @@ export async function damageCharacter(req: Request, res: Response): Promise<Resp
     return res.status(200).json({
       id: character._id,
       name: character.name,
-      damage_recieved: damageAmount,
+      base_damage: damageAmount,
+      damage_recieved: appliedDamage,
       damage_type_recieved: damageType,
       defense_against_damage: defenseType,
       original_hit_points: originalHitPoints,
