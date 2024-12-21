@@ -3,7 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config";
 import DB from "./db";
-import routes from "./routes/routes";
+import characters from "./routes/characters";
 import { initialiseCharacterDb } from "./controllers/character/characterController";
 
 const app = express();
@@ -21,7 +21,7 @@ DB.on("error", console.error.bind(console, "Connection error"));
 DB.on("connected", initialiseCharacterDb);
 
 // configure routes
-routes(app);
+app.use("/characters", characters);
 
 app.listen(config.port, () => {
   if (config.env === "development") {
