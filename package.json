@@ -6,7 +6,6 @@
     "build": "tsc",
     "start": "npm run build && node .",
     "test": "jest",
-    "test:watch": "jest --watch",
     "lint": "eslint"
   },
   "keywords": [],
