@@ -3,7 +3,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config";
 import DB from "./db";
-import characters from "./routes/characters";
+import characters from "./routes/characterRouter";
 import { initialiseCharacterDb } from "./controllers/character/characterController";
 
 const app = express();
