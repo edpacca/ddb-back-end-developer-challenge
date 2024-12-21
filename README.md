@@ -1,36 +1,43 @@
-# DDB Back End Developer Challenge
+# DDB Back-End Developer Challenge
 
-Welcome to my submission for the [DDB backend developer coding assigment](https://github.com/DnDBeyond/back-end-developer-challenge). The task requirements have been condensed and restated as I have understood them. _<span style="color:orange;">Additional notes are shown in orange for clarity</span>_
+Welcome to my submission for the [DDB backend developer coding assignment](https://github.com/DnDBeyond/back-end-developer-challenge). The task requirements have been condensed and restated as I have understood them.
 
-This project is built on NodeJS using TypeScript, Express and MongoDB, following modern backend development best practices.
+This project is built on **Node.js** using **TypeScript**, **Express**, and **MongoDB**, following modern backend development best practices.
 
-### Task Requirements
+---
 
-#### API
+## Task Requirements
 
-- [x] **Deal Damage to a player character**
-  - support different types, consider defenses
-  - Characters with resistance take half damage, while characters with immunity take no damage from a damage type.
-- [x] **Heal**
-  - increase character HP _<span style="color:orange;">assumed starting HP was max HP - cannot go above this_</span>
-  - Temporary Hit Points take precedence over the regular HP pool and cannot be healed.
-- [x] **Add Temporary Hit Points** - not additive, always taking the higher value, and cannot be healed.
+### API
 
-#### Implementation
+- **Deal Damage to a Player Character**
+  - Support different damage types, considering defenses.
+  - Characters with resistance take half damage; characters with immunity take no damage.
+- **Heal**
+  - Increases character HP (assumed max HP as the limit).
+  - Temporary hit points take precedence and cannot be healed.
+- **Add Temporary Hit Points**
+  - Not additive; always takes the higher value.
 
-- [x] Build the API in ~~either C# or~~ NodeJS
-- [x] Ensure that character information, including HP, is initialized during the start of the application.
-- [x] Retrieve character information, including HP, from the `briv.json` file.
-- [x] Data persists throughout App lifetime -<span style="color:orange;"> _DB is reset on startup_</span>
-- [x] Use character filename as identifier - <span style="color:orange;">_using filename without ".json" extension as id_</span>
+### Implementation
+
+- Build the API in ~~C#~~ or **Node.js**.
+- Initialize character information, including HP, at application start.
+- Retrieve character information from the `briv.json` file.
+- Persist data throughout the app's lifetime (_reset on startup_).
+- Use the character filename (without `.json` extension) as the identifier.
+
+---
 
 ## Prerequisites
 
-1. [Node.js](https://nodejs.org/en) (v20 recommended)
+1. [Node.js](https://nodejs.org/) (v18+ recommended)
 2. [npm](https://www.npmjs.com/) (comes with Node.js)
-3. One of the following
-   - [Docker](https://www.docker.com/) v ~=27
-   - [MongoDB](https://www.mongodb.com/products/self-managed/community-edition) Community Edition for running a local instance (v ~=2.3.4 recommended)
+3. MongoDB:
+   - [Docker](https://www.docker.com/) v27 (recommended)
+   - [MongoDB Community Edition](https://www.mongodb.com/products/community) for a local instance (v7 recommended).
+
+---
 
 ## Scripts
 
@@ -41,203 +48,177 @@ This project is built on NodeJS using TypeScript, Express and MongoDB, following
 | `test`     | `jest`                    | Runs the test suite using Jest.                 |
 | `lint`     | `eslint`                  | Lints the codebase for style and syntax issues. |
 
+---
+
 ## Project Setup
 
-```
+### Clone the Repository
+
+```bash
 git clone git@github.com:edpacca/ddb-back-end-developer-challenge.git
 cd ddb-back-end-developer-challenge
 ```
 
-**_IMPORTANT_**
-create a file called `.env` in the top directory and add the following
+### Configure Environment Variables
 
-```
+Create a `.env` file in the project root with the following:
+
+```env
 MONGO_LOCAL_URI=mongodb://127.0.0.1:27017
 MONGO_DOCKER_URI=mongodb://mongo:27017
 DB_NAME=characters
 DEBUG=true
+
+NODE_ENV=development
+PORT=3000
 ```
 
-preconfigured params that you may change are:
+---
 
-```
-NODE_ENV="development"
-PORT="3000",
-```
+## Running the Application
 
-## Run with Docker (recommended method)
+### Using Docker (Recommended)
 
-Navigate to the root directory and run:
+1. Navigate to the project root.
+2. Start the containers:
+   ```bash
+   docker compose up -d
+   ```
+3. Access the API at `http://localhost:3000` (or the port specified).
 
-```
-docker compose up -d
-```
+#### Older Docker Versions
 
-NB // older versions of docker do not support the `compose` command. If this doesn't work then consider upgrading or [installing docker-compose](https://docs.docker.com/compose/install/) and running:
+If `docker compose` isn't available, use:
 
-```
+```bash
 docker-compose up -d
 ```
 
-then query the API on `http://localhost:3000` (or whichver port was specified)
+---
 
-## Run locally without Docker (requires a local instance of MongoDB)
+### Running Locally (Without Docker)
 
 #### 1. Install MongoDB Community Edition
 
-Community edition is free and does not (typically) require any preconfiguration after installing to work.
+Follow the instructions for your operating system:
 
-- [Linux installation](https://www.mongodb.com/docs/manual/administration/install-on-linux/)
+- [Linux Installation](https://www.mongodb.com/docs/manual/administration/install-on-linux/)
+- [Windows Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+- [MacOS Installation](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
 
-- [Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+#### 2. Install Node.js Packages
 
-  - if you install as service mongo may be running in the background after installation
+Run the following in the project root:
 
-- [MacOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
-
-  - if you install as service mongo may be running in the background after installation
-  - NB // I have never used MongoDB on a mac - hopefully there are no gotchas
-
-#### 1. Install Node packages
-
-navigate to the root directory of the project
-
-```
+```bash
 npm install
 ```
 
-#### 3. Create directory called `db/` in the root of the project
+#### 3. Create a `db/` Directory
 
-this keeps a separate MongoDb database and avoids potential issues with system
+Create a directory to store the MongoDB database:
 
-```
+```bash
 mkdir db
 ```
 
-#### 4. Run MongoDb Community Edition
+#### 4. Start MongoDB
 
-in a new terminal, navigate to the root directory of the project where you created db/ and run
+Start MongoDB with the `db/` directory:
 
-##### [Linux](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/#start-mongodb)
+- **Linux/MacOS**:
+  ```bash
+  mongod --dbpath ./db
+  ```
+- **Windows**:
+  ```bash
+  "C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe" --dbpath="{PATH TO PROJECT DIR}\db"
+  ```
 
-```
-mongod --dbpath ./db
-```
+#### 5. Run the Application
 
-##### [Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#run-mongodb-community-edition-from-the-command-interpreter)
+Start the application:
 
-check if mongo is not running already as a service
-Run `mongod.exe` - if located in the standard installation location
-
-```
-"C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe" --dbpath="{PATH TO PROJECT DIR}\db"
-```
-
-##### [MacOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#run-mongodb-community-edition)
-
-Check mongo is not running already as a service
-in root directory of project
-
-```
-mongod --dbpath ./db
-```
-
-#### 5. Run the application
-
-in the top directory of the project simply run
-
-```
+```bash
 npm run start
 ```
 
-which will build and run the application from the `dist/` dir.
+Access the API at `http://localhost:3000`.
 
-### Usage
+---
 
-Query the API on `http://localhost:3000` (or whichver port was specified
-the port specified in the environment variables (default 3000).
+## API Endpoints
 
-Preconfigured postman files are provided in
+### `POST /characters/{id}/damage`
 
-### Endpoint.s
+- Apply damage to a character.
+- **Request Body**:
+  ```json
+  {
+    "damageType": "string",
+    "damageAmount": "integer"
+  }
+  ```
 
-## `POST` `/characters/{id}/damage`
+---
 
-Apply damage to character via id.
+### `POST /characters/{id}/heal`
 
-### request body
+- Apply healing to a character.
+- **Request Body**:
+  ```json
+  {
+    "healAmount": "integer"
+  }
+  ```
 
-```
+---
 
-{
-"damageType": string,
-"damageAmount": integer
-}
+### `POST /characters/{id}/temphp`
 
-```
+- Add temporary HP to a character.
+- **Request Body**:
+  ```json
+  {
+    "tempHitPoints": "integer"
+  }
+  ```
 
-## `POST` `/characters/{id}/heal`
+---
 
-Apply healing to character via id.
+### `POST /characters/`
 
-### request body
+- Create a new character in the database.
+- **Request Body**:
+  See the [Character Interface](https://github.com/edpacca/ddb-back-end-developer-challenge/blob/main/src/models/interfaces/character.ts).
 
-```
+---
 
-{
-"healAmount": integer
-}
+### `GET /characters/{id}`
 
-```
+- Retrieve a character by ID.
 
-## `POST` `/characters/{id}/temphp`
+---
 
-Add temp HP to character via id.
+### `PUT /characters/{id}`
 
-### request body
+- Update a character's information.
+- **Request Body**:
+  ```json
+  {
+    "Partial<Character>"
+  }
+  ```
 
-```
+---
 
-{
-"tempHitPoints": integer
-}
+### `DELETE /characters/{id}`
 
-```
+- Delete a character by ID.
 
-## `POST` `/characters/`
+---
 
-Create new character in DB. See [Character](https://github.com/edpacca/ddb-back-end-developer-challenge/blob/main/src/models/interfaces/character.ts) interface
+## Notes
 
-### request body
-
-```
-
-{
-  Character
-}
-
-```
-
-## `GET` `/characters/{id}`
-
-Retrieve a character via id
-
-## `PUT` `/characters/{id}`
-
-Edit a character via id. Updates only provided data See [Character](https://github.com/edpacca/ddb-back-end-developer-challenge/blob/main/src/models/interfaces/character.ts) interface
-
-```
-
-{
-  Partial<Character>
-}
-
-```
-
-## `DELETE` `/characters/{id}`
-
-Delete a character via id.
-
-```
-
-```
+- Preconfigured Postman collections are provided for testing.
+- Ensure MongoDB is running when using the application locally.
