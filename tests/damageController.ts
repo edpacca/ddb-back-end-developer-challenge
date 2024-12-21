@@ -8,6 +8,7 @@ import { DamageType } from "../src/model/enum/DamageType";
 import { DefenseType } from "../src/model/enum/DefenseType";
 import { HitPoints } from "../src/model/interface/character";
 import { testCharacter } from "./testData";
+import { calcAppliedDamage } from "../src/controllers/damage/calcAppliedDamage";
 
 jest.mock("../src/model/schema/CharacterSchema");
 jest.mock("../src/controllers/damage/checkDefenseAgainstDamageType");
@@ -88,6 +89,7 @@ describe("damageCharacter", () => {
       () => DefenseType.Resistance,
     );
     (extractHitpoints as jest.Mock).mockImplementationOnce(() => startingHitPoints);
+    (calcAppliedDamage as jest.Mock).mockImplementationOnce(() => 10);
     (damageHitPoints as jest.Mock).mockImplementationOnce(() => finalHitPoints);
 
     // Mock requests - character will be Resistant to Fire
@@ -100,7 +102,8 @@ describe("damageCharacter", () => {
     expect(res.json).toHaveBeenCalledWith({
       id: character._id,
       name: character.name,
-      damage_recieved: 20,
+      base_damage: 20,
+      damage_recieved: 10,
       damage_type_recieved: DamageType.Fire,
       defense_against_damage: DefenseType.Resistance,
       original_hit_points: startingHitPoints,
