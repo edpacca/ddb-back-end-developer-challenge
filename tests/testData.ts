@@ -1,6 +1,6 @@
-import { DamageType } from "../src/model/enum/DamageType";
-import { DefenseType } from "../src/model/enum/DefenseType";
-import { Character } from "../src/model/interface/character";
+import { DamageType } from "../src/models/enums/DamageType";
+import { DefenseType } from "../src/models/enums/DefenseType";
+import { Character } from "../src/models/interfaces/character";
 
 export const testCharacter: Character = {
   _id: "bill",
