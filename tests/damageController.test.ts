@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CharacterDb from "../src/models/schema/CharacterSchema";
+import CharacterDb from "../src/db/repositoryInterface";
 import { damageCharacter } from "../src/controllers/damage/damageController";
 import { checkDefenceAgainstDamageType } from "../src/controllers/damage/checkDefenseAgainstDamageType";
 import { extractHitpoints } from "../src/utils/extractHitpoints";
@@ -10,7 +10,7 @@ import { HitPoints } from "../src/models/interfaces/character";
 import { testCharacter } from "./testData";
 import { calcAppliedDamage } from "../src/controllers/damage/calcAppliedDamage";
 
-jest.mock("../src/models/schema/CharacterSchema");
+jest.mock("../src/db/repositoryInterface");
 jest.mock("../src/controllers/damage/checkDefenseAgainstDamageType");
 jest.mock("../src/controllers/damage/calcAppliedDamage");
 jest.mock("../src/controllers/damage/damageHitPoints");
@@ -36,7 +36,7 @@ describe("damageCharacter", () => {
 
   it("should return 404 if the character is not found", async () => {
     // Mock returning no character from the databse
-    (CharacterDb.findById as jest.Mock).mockImplementationOnce(() => null);
+    (CharacterDb.findCharacterById as jest.Mock).mockImplementationOnce(() => null);
 
     const req = mockRequest({ id: "jim" }, { damageType: "acid", damageAmount: 10 });
     const res = mockResponse();
@@ -77,12 +77,10 @@ describe("damageCharacter", () => {
     // Mock returning the character from the mongoose Model API
     // .lean() is called on the returned object in the real implementation
     // mock an object with a fn 'lean' that returns a Character
-    (CharacterDb.findById as jest.Mock).mockImplementationOnce(() => ({
-      lean: jest.fn().mockReturnValue(character),
-    }));
+    (CharacterDb.findCharacterById as jest.Mock).mockImplementationOnce(() => character);
 
     // return value does not matter, return an empty object
-    (CharacterDb.findByIdAndUpdate as jest.Mock).mockImplementationOnce(() => {});
+    (CharacterDb.findCharacterByIdAndUpdate as jest.Mock).mockImplementationOnce(() => {});
 
     // Mock the logic functions to ensure expected result
     (checkDefenceAgainstDamageType as jest.Mock).mockImplementationOnce(
@@ -112,7 +110,7 @@ describe("damageCharacter", () => {
   });
 
   it("should return 500 if an error occurs", async () => {
-    (CharacterDb.findById as jest.Mock).mockImplementationOnce(() => {
+    (CharacterDb.findCharacterById as jest.Mock).mockImplementationOnce(() => {
       throw new Error();
     });
 
