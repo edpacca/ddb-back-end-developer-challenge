@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { ItemModifier } from "../interface/itemModifier";
+import { ItemModifier } from "../interfaces/itemModifier";
 
 export const ItemModifierSchema = new Schema<ItemModifier>({
   affectedObject: { type: String, required: true },

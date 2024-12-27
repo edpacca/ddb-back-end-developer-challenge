@@ -3,15 +3,16 @@ import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config";
 import setupDatabase from "./db/index";
-import routes from "./routes/routes";
+import characters from "./routes/characterRouter";
 
 const app = express();
 
 // configure middleware
 app.use(helmet()); // helmet sets security related HTTP headers
+app.use(helmet.xssFilter()); // protect against cross site scripting
 app.use(express.json()); // only accept json payloads
 
-if (config.env === "development") {
+if (config.debug) {
   app.use(morgan("dev"));
 }
 
@@ -24,10 +25,10 @@ if (config.env === "development") {
 })();
 
 // configure routes
-routes(app);
+app.use("/characters", characters);
 
 app.listen(config.port, () => {
-  if (config.env === "development") {
+  if (config.env === "development" || config.debug) {
     console.log(`server listening on port: ${config.port}`);
   }
 });

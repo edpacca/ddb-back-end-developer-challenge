@@ -1,4 +1,4 @@
-import { HitPoints } from "../../model/interface/character";
+import { HitPoints } from "../../models/interfaces/character";
 
 /**
  * Takes a HitPoints obejct and updates with healing
@@ -8,6 +8,10 @@ import { HitPoints } from "../../model/interface/character";
  * @returns a new HitPoints object with updated values.
  */
 export function healHitPoints(hitPoints: HitPoints, appliedHealing: number): HitPoints {
+  if (appliedHealing <= 0) {
+    return hitPoints;
+  }
+
   const newCurrentHitPoints = Math.min(
     hitPoints.hitPoints,
     hitPoints.currentHitPoints + appliedHealing,

@@ -1,4 +1,4 @@
-import { Character, HitPoints } from "../model/interface/character";
+import { Character, HitPoints } from "../models/interfaces/character";
 
 /**
  * Takes an object matching Character interface

@@ -1,0 +1,201 @@
+openapi: 3.0.3
+info:
+  title: Characters API
+  version: 1.0.0
+  description: API for managing character data and operations (damage, heal, temporary hit points, etc.)
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /characters/{id}/damage:
+    post:
+      summary: Apply damage to a character
+      description: Applies damage to a character's hit points.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the character
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DamageRequestBody"
+      responses:
+        "200":
+          description: Character successfully damaged
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Character"
+        "400":
+          description: Invalid request
+        "404":
+          description: Character not found
+  /characters/{id}/heal:
+    post:
+      summary: Heal a character
+      description: Applies healing to a character's hit points.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the character
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealRequestBody"
+      responses:
+        "200":
+          description: Character successfully healed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Character"
+        "400":
+          description: Invalid request
+        "404":
+          description: Character not found
+  /characters/{id}/temphp:
+    post:
+      summary: Update temporary hit points
+      description: Updates a character's temporary hit points.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the character
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTempHitPointsRequestBody"
+      responses:
+        "200":
+          description: Temporary hit points successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Character"
+        "400":
+          description: Invalid request
+        "404":
+          description: Character not found
+  /characters/{id}:
+    get:
+      summary: Get a character by ID
+      description: Fetches a character's details by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the character
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Character found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Character"
+        "404":
+          description: Character not found
+    put:
+      summary: Update a character by ID
+      description: Updates a character's details by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the character
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCharacterRequestBody"
+      responses:
+        "200":
+          description: Character successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Character"
+        "404":
+          description: Character not found
+    delete:
+      summary: Delete a character by ID
+      description: Deletes a character by their ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the character
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Character successfully deleted
+        "404":
+          description: Character not found
+components:
+  schemas:
+    DamageRequestBody:
+      type: object
+      properties:
+        damageType:
+          type: string
+        damageAmount:
+          type: number
+      required:
+        - damageType
+        - damageAmount
+    HealRequestBody:
+      type: object
+      properties:
+        healAmount:
+          type: number
+      required:
+        - healAmount
+    UpdateTempHitPointsRequestBody:
+      type: object
+      properties:
+        tempHitPoints:
+          type: number
+      required:
+        - tempHitPoints
+    UpdateCharacterRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        level:
+          type: number
+        hitPoints:
+          type: number
+    Character:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        level:
+          type: number
+        hitPoints:
+          type: number
+        tempHitPoints:
+          type: number

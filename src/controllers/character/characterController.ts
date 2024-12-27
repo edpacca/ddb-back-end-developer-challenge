@@ -1,8 +1,18 @@
 import { Request, Response } from "express";
-import Character from "../../model/schema/CharacterSchema";
+import Character from "../../models/schema/CharacterSchema";
 
-// Get a character by ID
-export const getCharacter = async (req: Request, res: Response): Promise<Response> => {
+export async function createCharacter(req: Request, res: Response): Promise<Response> {
+  try {
+    const data = req.body;
+    const newCharacter = await Character.create({ ...data });
+
+    return res.status(201).json(newCharacter);
+  } catch (error) {
+    return res.status(500).json({ message: "Error creating character", error });
+  }
+}
+
+export async function getCharacter(req: Request, res: Response): Promise<Response> {
   try {
     const { id } = req.params;
     const character = await Character.findById(id);
@@ -15,13 +25,13 @@ export const getCharacter = async (req: Request, res: Response): Promise<Respons
   } catch (error) {
     return res.status(500).json({ message: "Error fetching character", error });
   }
-};
+}
 
-// Update a character by ID
-export const updateCharacter = async (req: Request, res: Response): Promise<Response> => {
+export async function updateCharacter(req: Request, res: Response): Promise<Response> {
   try {
     const { id } = req.params;
     const updates = req.body;
+    delete updates._id; // do not override _id
 
     const updatedCharacter = await Character.findByIdAndUpdate(id, updates, {
       new: true,
@@ -35,12 +45,18 @@ export const updateCharacter = async (req: Request, res: Response): Promise<Resp
   } catch (error) {
     return res.status(500).json({ message: "Error updating character", error });
   }
-};
+}
 
-// Delete a character by ID
-export const deleteCharacter = async (req: Request, res: Response): Promise<Response> => {
+export async function deleteCharacter(req: Request, res: Response): Promise<Response> {
   try {
     const { id } = req.params;
+
+    if (id === "briv") {
+      return res.status(418).json({
+        message:
+          "If you think a mere DELETE request can delete Briv, then you are gravely mistaken. Briv cannot be deleted!",
+      });
+    }
 
     const deletedCharacter = await Character.findByIdAndDelete(id);
 
@@ -48,8 +64,8 @@ export const deleteCharacter = async (req: Request, res: Response): Promise<Resp
       return res.status(404).json({ message: "Character not found" });
     }
 
-    return res.status(200).json({ message: "Character deleted successfully" });
+    return res.status(200).json({ message: `Character with id: ${id} deleted successfully` });
   } catch (error) {
     return res.status(500).json({ message: "Error deleting character", error });
   }
-};
+}

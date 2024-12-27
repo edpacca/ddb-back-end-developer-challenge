@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { Stats } from "../interface/stats";
+import { Stats } from "../interfaces/stats";
 
 export const StatsSchema = new Schema<Stats>({
   strength: { type: Number, required: true },

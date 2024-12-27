@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Character } from "../model/interface/character";
+import { Character } from "../models/interfaces/character";
 
 export interface DamageRequest {
   damageAmount: number;
@@ -28,4 +28,6 @@ export type UpdateTempHitPointsRequestBody = TypedRequestBody<UpdateTempHitPoint
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type EmptyRequestBody = TypedRequestBody<{}>;
 
-export type UpdateCharacterRequestBody = TypedRequestBody<{ data: Character }>;
+export type UpdateCharacterRequestBody = TypedRequestBody<{ data: Partial<Character> }>;
+
+export type CreateCharacterRequestBody = TypedRequestBody<{ data: Character }>;

@@ -1,4 +1,4 @@
-import { DamageType } from "../model/enum/DamageType";
+import { DamageType } from "../models/enums/DamageType";
 
 /**
  * Check if a string is a valid value in the DamageType enum.
