@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { Character } from "../model/interface/character";
+import { Character } from "../models/interfaces/character";
 
 export class CharacterRepository {
   private data: Character[] = [];
