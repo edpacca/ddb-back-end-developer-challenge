@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       - DOCKER=true
+      - NODE_ENV=production
     ports:
       - "3000:3000"
     depends_on:
