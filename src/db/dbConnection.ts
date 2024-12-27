@@ -5,6 +5,9 @@ import defaultCharacterData from "./data/briv.json";
 
 // only intended for internal use to load in the test data
 export async function initialiseCharacterDb() {
+  if (config.debug) {
+    console.log("initialising Db");
+  }
   try {
     await Character.deleteMany({}); // Clear characters
     const newCharacter = await Character.create({
@@ -12,7 +15,9 @@ export async function initialiseCharacterDb() {
       _id: "briv",
       currentHitPoints: defaultCharacterData.hitPoints,
     });
-    console.log(`Created new character: ${newCharacter.name}`);
+    if (config.debug) {
+      console.log(`Created new character: ${newCharacter.name}`);
+    }
   } catch (error) {
     console.error("error creating character", error);
   }
