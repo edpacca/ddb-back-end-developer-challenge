@@ -33,9 +33,11 @@ This project is built on **Node.js** using **TypeScript**, **Express**, and **Mo
 
 1. [Node.js](https://nodejs.org/) (v18+ recommended)
 2. [npm](https://www.npmjs.com/) (comes with Node.js)
-3. MongoDB:
+3. MongoDB\*:
    - [Docker](https://www.docker.com/) v27 (recommended)
    - [MongoDB Community Edition](https://www.mongodb.com/products/community) for a local instance (v7 recommended).
+
+- _OPTIONAL_ - if MongoDB is not available try checking out the feature branch `db-config` and ensure the environment variable: `NODE_ENV="development"` is set.
 
 ---
 
@@ -158,6 +160,48 @@ Start the application:
 ```bash
 npm run start
 ```
+
+Access the API at `http://localhost:3000`.
+
+---
+
+### Running Locally (Without Docker, Without MongoDB)
+
+_If neither Docker nor MongoDb are available_.
+ensure the following environment variables are set:
+
+```env
+MONGO_LOCAL_URI=mongodb://127.0.0.1:27017
+DB_NAME=characters
+DEBUG=true
+NODE_ENV=development
+PORT=3000
+```
+
+Run all commands from the project root:
+
+#### 1. check out the feature branch `db-config`
+
+```bash
+git fetch
+git checkout db-config
+```
+
+#### 2. Install Node.js Packages
+
+```bash
+npm install
+```
+
+#### 3. Run the Application
+
+Start the application:
+
+```bash
+npm run start
+```
+
+You should see the log message "Using in memory storage".
 
 Access the API at `http://localhost:3000`.
 
