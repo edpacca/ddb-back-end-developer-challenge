@@ -37,7 +37,7 @@ This project is built on **Node.js** using **TypeScript**, **Express**, and **Mo
    - [Docker](https://www.docker.com/) v27 (recommended)
    - [MongoDB Community Edition](https://www.mongodb.com/products/community) for a local instance (v7 recommended).
 
-- _OPTIONAL_ - if MongoDB is not available try checking out the feature branch `db-config` and ensure the environment variable: `NODE_ENV="development"` is set.
+\* _OPTIONAL_ - if MongoDB is not available see [Feature branch - Running Locally Without MongoDB](#running-locally-without-mongodb)
 
 ---
 
@@ -165,17 +165,13 @@ Access the API at `http://localhost:3000`.
 
 ---
 
-### Running Locally (Without Docker, Without MongoDB)
+### Running Locally Without MongoDB
 
 _If neither Docker nor MongoDb are available_.
-ensure the following environment variables are set:
+ensure the `NODE_ENV` environment variable is set to development.
 
 ```env
-MONGO_LOCAL_URI=mongodb://127.0.0.1:27017
-DB_NAME=characters
-DEBUG=true
 NODE_ENV=development
-PORT=3000
 ```
 
 Run all commands from the project root:
