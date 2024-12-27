@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import config from "../config";
-import Character from "../model/schema/CharacterSchema";
+import Character from "../models/schema/CharacterSchema";
 import defaultCharacterData from "./data/briv.json";
 
 // only intended for internal use to load in the test data
