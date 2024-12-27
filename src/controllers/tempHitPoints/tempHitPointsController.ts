@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import CharacterDb from "../../models/schema/CharacterSchema";
 import { Character } from "../../models/interfaces/character";
 import { calcNewTempHitPoints } from "./calcNewTempHitPoints";
+import CharacterDb from "../../db/repositoryInterface";
 
 export async function updateCharacterTempHitpoints(req: Request, res: Response): Promise<Response> {
   try {
@@ -9,9 +9,7 @@ export async function updateCharacterTempHitpoints(req: Request, res: Response):
     const { tempHitPointsAmount } = req.body;
     const tempHitPoints = Number(tempHitPointsAmount); // ideally would sanitize body with middleware
 
-    // use .lean() to strip additional mongodb document properties
-    // use conditional chaining in case of null value
-    const character: Character | null = await CharacterDb.findById(id)?.lean();
+    const character: Character | null | undefined = await CharacterDb.findCharacterById(id);
 
     if (!character) {
       return res.status(404).json({ message: "Character not found" });
@@ -21,7 +19,7 @@ export async function updateCharacterTempHitpoints(req: Request, res: Response):
     const updatedTempHitPoints = calcNewTempHitPoints(originalTempHitPoints, tempHitPoints);
 
     const updatedCharacter: Character = { ...character, tempHitPoints: updatedTempHitPoints };
-    await CharacterDb.findByIdAndUpdate(id, { ...updatedCharacter });
+    await CharacterDb.findCharacterByIdAndUpdate(id, { ...updatedCharacter });
 
     // return only relevant data
     return res.status(200).json({

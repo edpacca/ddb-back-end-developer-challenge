@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import Character from "../../models/schema/CharacterSchema";
+import Character from "../../db/repositoryInterface";
 
 export async function createCharacter(req: Request, res: Response): Promise<Response> {
   try {
     const data = req.body;
-    const newCharacter = await Character.create({ ...data });
+    const newCharacter = await Character.createCharacter({ ...data });
 
     return res.status(201).json(newCharacter);
   } catch (error) {
@@ -15,7 +15,7 @@ export async function createCharacter(req: Request, res: Response): Promise<Resp
 export async function getCharacter(req: Request, res: Response): Promise<Response> {
   try {
     const { id } = req.params;
-    const character = await Character.findById(id);
+    const character = await Character.findCharacterById(id);
 
     if (!character) {
       return res.status(404).json({ message: "Character not found" });
@@ -23,6 +23,7 @@ export async function getCharacter(req: Request, res: Response): Promise<Respons
 
     return res.status(200).json(character);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "Error fetching character", error });
   }
 }
@@ -33,7 +34,7 @@ export async function updateCharacter(req: Request, res: Response): Promise<Resp
     const updates = req.body;
     delete updates._id; // do not override _id
 
-    const updatedCharacter = await Character.findByIdAndUpdate(id, updates, {
+    const updatedCharacter = await Character.findCharacterByIdAndUpdate(id, updates, {
       new: true,
     });
 
@@ -58,7 +59,7 @@ export async function deleteCharacter(req: Request, res: Response): Promise<Resp
       });
     }
 
-    const deletedCharacter = await Character.findByIdAndDelete(id);
+    const deletedCharacter = await Character.findCharacterByIdAndDelete(id);
 
     if (!deletedCharacter) {
       return res.status(404).json({ message: "Character not found" });
