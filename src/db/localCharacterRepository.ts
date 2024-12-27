@@ -10,7 +10,7 @@ export class CharacterRepository {
    * If no file provided it will load the default character file
    * @param filePath - Path to the JSON file.
    */
-  constructor(filePath: string = `__dirname/data/briv.json`) {
+  constructor(filePath: string = `${__dirname}/data/briv.json`) {
     this.loadData(filePath);
   }
 
@@ -24,7 +24,7 @@ export class CharacterRepository {
       const loadedCharacterData = JSON.parse(fileContent);
       const hydratedCharacterData: Character = {
         ...loadedCharacterData,
-        _id: fileName,
+        _id: fileName.replace(/\.[^/.]+$/, ""), // use regex to replace file extension with ""
         currentHitPoints: loadedCharacterData.hitPoints,
         tempHitPoints: 0,
       };
@@ -72,7 +72,11 @@ export class CharacterRepository {
    * @param updates - The partial updates to apply to the object.
    * @returns The updated object or `null` if not found.
    */
-  public async updateById(id: string, updates: Partial<Character>): Promise<Character | undefined> {
+  public async updateById(
+    id: string,
+    updates: Partial<Character>,
+    options?: object,
+  ): Promise<Character | undefined> {
     return new Promise((resolve, reject) => {
       const index = this.data.findIndex((character) => character._id === id);
       if (index === -1) {
