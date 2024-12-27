@@ -7,7 +7,7 @@ async function setupDatabase() {
     const DB = await connectDB();
     if (DB) {
       DB.on("error", console.error.bind(console, "Connection error"));
-      DB.on("connected", initialiseCharacterDb);
+      await initialiseCharacterDb();
     }
   }
   // If not production we use our local repository set up via the interface layer
