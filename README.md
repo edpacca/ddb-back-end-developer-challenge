@@ -15,8 +15,8 @@ This project is built on **Node.js** using **TypeScript**, **Express**, and **Mo
   - Characters with resistance take half damage; characters with immunity take no damage.
 - **Heal**
   - Increases character HP (assumed max HP as the limit).
-  - Temporary hit points take precedence and cannot be healed.
 - **Add Temporary Hit Points**
+  - Temporary hit points take precedence when damage is dealt, and cannot be healed.
   - Not additive; always takes the higher value.
 
 ### Implementation
